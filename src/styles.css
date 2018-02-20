@@ -1,0 +1,60 @@
+html {
+	font-family: sans-serif;
+}
+
+body {
+	background: #f7f7f7;
+}
+
+#root {
+	width: 600px;
+    margin: auto;
+}
+
+.posts {
+	background: white;
+    border: 1px solid black;
+    border-bottom: none;
+}
+
+.post {
+	min-height: 102px;
+	border-bottom: 1px solid black;
+}
+
+.content {
+	margin-left: 85px;
+    position: relative;
+    padding: 20px;
+}
+
+.avatar {
+    width: 60px;
+	height: 60px;
+    position: absolute;
+	left: -60px;
+    border: 1px solid;
+    border-radius: 50%;
+}
+
+.avatar.red {
+	background: red;
+}
+
+.avatar.deepskyblue {
+	background: deepskyblue;
+}
+
+.name {
+	margin-right: 10px;
+}
+
+.created {
+	color: #657786;
+}
+
+.text {
+	margin: 10px 0;
+	color: #14171a;
+}
+
