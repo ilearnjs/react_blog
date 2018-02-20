@@ -13,16 +13,16 @@ body {
 
 .posts {
 	background: white;
-    border: 1px solid black;
+    border: 1px solid #65768a;
     border-bottom: none;
 }
 
 .post {
 	min-height: 102px;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #65768a;
 }
 
-.content {
+.post-content {
 	margin-left: 85px;
     position: relative;
     padding: 20px;
@@ -33,20 +33,53 @@ body {
 	height: 60px;
     position: absolute;
 	left: -60px;
-    border: 1px solid;
+    border: 1px solid #65768a;
     border-radius: 50%;
 }
 
-.avatar.red {
-	background: red;
+.avatar-big {
+	width: 120px;
+    float: left;
+    height: 120px;
+	margin-right: 20px;
+	border-right: 1px solid #65768a;
 }
 
-.avatar.deepskyblue {
-	background: deepskyblue;
+.avatar.orange, .avatar-big.orange {
+	background: orange;
+}
+
+.avatar.white, .avatar-big.white {
+	background: white;
+}
+
+.avatar.brown {
+	background: brown;
+}
+
+.avatar-big.brown  {
+	background-image: url(http://2.media.dorkly.cvcdn.com/36/86/0a47d1ca0a9a9bc0652e76491b72fb1a-mr-brown.jpg);
+	background-size: cover;         
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.avatar.pink, .avatar-big.pink  {
+	background: pink;
+}
+
+.avatar.blue, .avatar-big.blue {
+	background: blue;
 }
 
 .name {
 	margin-right: 10px;
+}
+
+.name-big {
+	display: block;
+	padding: 45px;
+    font-size: 1.5rem;
 }
 
 .created {
@@ -55,6 +88,13 @@ body {
 
 .text {
 	margin: 10px 0;
+	white-space: pre-line;
 	color: #14171a;
 }
 
+.user {
+	min-height: 120px;
+    border: 1px solid #65768a;
+    margin-bottom: 20px;
+    background: white;
+}

@@ -13,15 +13,21 @@ export default class Posts extends Component {
 	}
 
 	componentDidMount() {
-		// TODO Move to data service
+		// TODO Replace with api call
 		setTimeout(
 			() => {
 				this.setState({
-					posts: posts,
+					posts: this.getPosts(),
 					isLoading: false
 				});
 			}, 1000
 		);
+	}
+
+	getPosts() {
+		return this.props.userName
+			? posts.filter(p => p.user.name === this.props.userName)
+			: posts;
 	}
 
 	render() {
