@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Layout from './container/Layout/Layout';
-import Posts from './container/Posts/Posts';
-import User from './container/User/User';
+import Layout from './containers/Layout/Layout';
+import Posts from './containers/Posts/Posts';
+import User from './containers/User/User';
 
 const app = () => (
 	<Layout>
