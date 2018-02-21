@@ -19,7 +19,7 @@ module.exports = {
 				include: /src/,
 				loader: 'babel-loader',
 				query: {
-					presets: ['react', 'es2017'],
+					presets: ['es2015', 'es2017', 'stage-0', 'react'],
 				},
 			},
 		],

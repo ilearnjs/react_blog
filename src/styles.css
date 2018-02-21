@@ -28,6 +28,19 @@ body {
     padding: 20px;
 }
 
+.new-post {
+	min-height: 120px;
+	border: 1px solid #65768a;
+	margin-bottom: 20px;
+	background: white;
+}
+
+.new-post-content {
+	margin-left: 85px;
+    position: relative;
+    padding: 20px;
+}
+
 .avatar {
     width: 60px;
 	height: 60px;
@@ -97,4 +110,9 @@ body {
     border: 1px solid #65768a;
     margin-bottom: 20px;
     background: white;
+}
+
+textarea {
+	resize: none;
+	margin: 10px 0;
 }

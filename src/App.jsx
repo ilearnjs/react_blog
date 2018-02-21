@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Layout from './containers/Layout/Layout';
-import Posts from './containers/Posts/Posts';
-import User from './containers/User/User';
+import MainContainer from './containers/MainContainer/MainContainer';
+import UserContainer from './containers/UserContainer/UserContainer';
 
 const app = () => (
 	<Layout>
-		<Route exact path="/" component={Posts} />
-		<Route path="/user/:userName" component={User} />
+		<Route exact path="/" component={MainContainer} />
+		<Route path="/user/:userName" component={UserContainer} />
 	</Layout>
 );
 

@@ -4,7 +4,7 @@ const posts = [
 		user: {
 			name: 'orange'
 		},
-		created: new Date(),
+		created: new Date(2018, 1, 18),
 		content: 'The orange colour of carrots, pumpkins, sweet potatoes, oranges, and many other fruits and vegetables comes from carotenes, a type of photosynthetic pigment.'
 	},
 	{
@@ -12,7 +12,7 @@ const posts = [
 		user: {
 			name: 'white'
 		},
-		created: new Date(),
+		created: new Date(2018, 1, 19),
 		content: '#000000'
 	},
 	{
@@ -20,7 +20,7 @@ const posts = [
 		user: {
 			name: 'brown'
 		},
-		created: new Date(),
+		created: new Date(2018, 1, 20),
 		content: 'my real name is quentin'
 	},
 	{
@@ -28,7 +28,7 @@ const posts = [
 		user: {
 			name: 'orange'
 		},
-		created: new Date(),
+		created: new Date(2018, 1, 20),
 		content: 'What did the apple say to the orange? Nothing stupid, apples don\'t talk.'
 	},
 	{
@@ -36,7 +36,7 @@ const posts = [
 		user: {
 			name: 'pink'
 		},
-		created: new Date(),
+		created: new Date(2018, 1, 21),
 		content: '...'
 	},
 	{
@@ -44,7 +44,7 @@ const posts = [
 		user: {
 			name: 'blue'
 		},
-		created: new Date(),
+		created: new Date(2018, 1, 21),
 		content: 'I\'m blue'
 	},
 	{
@@ -52,9 +52,43 @@ const posts = [
 		user: {
 			name: 'orange'
 		},
-		created: new Date(),
+		created: new Date(2018, 1, 21),
 		content: `What is orange and sounds like a parrot?\nA carrot.`
 	},
 ];
 
-export default posts;
+let nextId;
+
+class PostsService {
+	constructor() {
+		nextId = Math.max(...posts.map(p => p.id));
+	}
+
+	get(userName) {
+		const filteredPosts = userName
+			? posts.filter(p => p.user.name === userName)
+			: posts;
+
+		return filteredPosts.sort((p1, p2) => p2.created - p1.created);
+	}
+
+	create(post, userName) {
+		post = Object.assign(
+			post,
+			{
+				id: ++nextId,
+				user: { name: userName },
+				created: new Date()
+			});
+		posts.push(post);
+	}
+
+	remove(postId) {
+		const index = posts.findIndex(p => p.id === postId);
+		posts.splice(index, 1);
+	}
+}
+
+const postsService = new PostsService();
+
+export default postsService;
