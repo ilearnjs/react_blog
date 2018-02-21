@@ -31,6 +31,14 @@ class MainContainer extends Component {
 		});
 	}
 
+	remove(postId) {
+		postsService.remove(postId);
+		this.setState({
+			posts: postsService.get(),
+			isLoading: false
+		});
+	}
+
 	render() {
 		if (this.state.isLoading) {
 			return (
@@ -40,8 +48,15 @@ class MainContainer extends Component {
 
 		return (
 			<Aux>
-				<NewPost add={this.add.bind(this)} />
-				<Posts posts={this.state.posts} />
+				<NewPost
+					currentUser={currentUser}
+					add={this.add.bind(this)}
+				/>
+				<Posts
+					posts={this.state.posts}
+					userName={currentUser.name}
+					remove={this.remove.bind(this)}
+				/>
 			</Aux>
 		);
 	}

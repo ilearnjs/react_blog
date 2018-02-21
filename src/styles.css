@@ -116,3 +116,7 @@ textarea {
 	resize: none;
 	margin: 10px 0;
 }
+
+.remove-btn {
+	float: right;
+}

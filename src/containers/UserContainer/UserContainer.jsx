@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import Aux from '../Auxiliary/Auxiliary';
 import Posts from '../../components/Posts/Posts';
 import UserInfo from '../../components/UserInfo/UserInfo';
-import Aux from '../Auxiliary/Auxiliary';
 import currentUser from '../../data/currentUser';
-import PostsService from '../../data/posts';
+import postsService from '../../data/posts';
 
 class UserContainer extends Component {
 	userName = this.props.match.params.userName;
@@ -17,11 +17,19 @@ class UserContainer extends Component {
 		setTimeout(
 			() => {
 				this.setState({
-					posts: PostsService.get(this.userName),
+					posts: postsService.get(this.userName),
 					isLoading: false
 				});
 			}, 1000
 		);
+	}
+
+	remove(postId) {
+		postsService.remove(postId);
+		this.setState({
+			posts: postsService.get(this.userName),
+			isLoading: false
+		});
 	}
 
 	render() {
@@ -33,8 +41,14 @@ class UserContainer extends Component {
 
 		return (
 			<Aux>
-				<UserInfo userName={this.userName} />
-				<Posts posts={this.state.posts} />
+				<UserInfo
+					userName={this.userName}
+				/>
+				<Posts
+					posts={this.state.posts}
+					userName={currentUser.name}
+					remove={this.remove.bind(this)}
+				/>
 			</Aux>
 		);
 	}
