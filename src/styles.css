@@ -107,6 +107,7 @@ body {
 }
 
 .text {
+	word-wrap: break-word;
 	margin: 10px 0;
 	white-space: pre-line;
 	color: #14171a;
