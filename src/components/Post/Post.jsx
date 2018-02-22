@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 class Post extends Component {
 	onRemoveClicked() {
 		const { post: { id }, remove } = this.props;
+		
 		remove(id);
 	}
 

@@ -17,7 +17,7 @@ class NewPost extends Component {
 		if (!this.state.content) {
 			return;
 		}
-		
+
 		this.props.add(this.state.content, this.currentUser.name);
 		this.setState({
 			content: ''
@@ -25,23 +25,24 @@ class NewPost extends Component {
 	}
 
 	render() {
+		const userName = this.currentUser.name;
+
 		return (
 			<div className="new-post">
 				<div className="new-post-content">
 					<div className="new-post-header">
-						<div className={`avatar ${this.currentUser.name}`}>
+						<div className={`avatar ${userName}`}>
 						</div>
-						<Link to={`/user/${this.currentUser.name}`}>
+						<Link to={`/user/${userName}`}>
 							<span className="name">
-								{`mr.${this.currentUser.name}`}
+								{`mr.${userName}`}
 							</span>
 						</Link>
 					</div>
 					<textarea
+						className="new-post-textarea "
 						value={this.state.content}
 						onChange={(e) => this.onContentChanged(e)}
-						cols="70"
-						rows="4"
 					></textarea>
 					<button onClick={() => this.onSendClick()}>
 						Post

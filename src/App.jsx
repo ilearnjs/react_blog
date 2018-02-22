@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Layout from './containers/Layout/Layout';
 import MainContainer from './containers/MainContainer/MainContainer';
 import UserContainer from './containers/UserContainer/UserContainer';
+import Aux from './containers/Auxiliary/Auxiliary';
 
 const app = () => (
-	<Layout>
+	<Aux>
 		<Route exact path="/" component={MainContainer} />
 		<Route path="/user/:userName" component={UserContainer} />
-	</Layout>
+	</Aux>
 );
 
 export default app;
