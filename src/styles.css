@@ -41,6 +41,13 @@ body {
     padding: 20px;
 }
 
+.new-post-textarea {
+	resize: none;
+	margin: 10px 0;
+	width: 450px;
+	height: 50px;
+}
+
 .avatar {
     width: 60px;
 	height: 60px;
@@ -110,11 +117,6 @@ body {
     border: 1px solid #65768a;
     margin-bottom: 20px;
     background: white;
-}
-
-textarea {
-	resize: none;
-	margin: 10px 0;
 }
 
 .remove-btn {
