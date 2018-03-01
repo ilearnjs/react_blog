@@ -1,35 +1,25 @@
 const path = require('path');
 
-
 module.exports = {
-	entry: path.join(__dirname, 'src', 'index.js'),
+	entry: `${__dirname}/src/index.js`,
+
 	output: {
-		path: path.resolve('dist'),
+		path: `${__dirname}/dist`,
 		filename: 'bundle.js',
+		publicPath: '/'
 	},
-	watch: false,
-	watchOptions: {
-		aggregateTimeout: 100,
-	},
-	devtool: 'inline-source-map',
-	module: {
-		loaders: [
-			{
-				test: /\.jsx?$/,
-				include: /src/,
-				loader: 'babel-loader',
-				query: {
-					presets: ['es2015', 'es2017', 'stage-0', 'react'],
-				},
-			},
-		],
-	},
+
 	resolve: {
 		extensions: ['.js', '.jsx'],
 	},
-	devServer: {
-		contentBase: './src',
-		historyApiFallback: true,
-		publicPath: '/',
+
+	module: {
+		rules: [
+			{
+				test: /\.jsx?$/,
+				include: /src/,
+				loader: 'babel-loader'
+			},
+		],
 	},
 };
