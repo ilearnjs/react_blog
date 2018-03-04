@@ -1,46 +1,21 @@
 import React, { Component } from "react";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import Aux from "../Auxiliary/Auxiliary";
 import Posts from '../../components/Posts/Posts';
 import NewPost from "../../components/NewPost/NewPost";
 import postsService from '../../data/posts';
 import currentUser from '../../data/currentUser';
+import { getPosts, addPost, removePost } from './../../reducers/main';
 
 class MainContainer extends Component {
-	state = {
-		posts: [],
-		isLoading: true,
-	}
-
 	componentDidMount() {
-		// TODO Replace with api call
-		setTimeout(
-			() => {
-				this.setState({
-					posts: postsService.get(),
-					isLoading: false
-				});
-			}, 1000
-		);
-	}
-
-	add(content, userName) {
-		postsService.create({ content }, userName);
-		this.setState({
-			posts: postsService.get(),
-			isLoading: false
-		});
-	}
-
-	remove(postId) {
-		postsService.remove(postId);
-		this.setState({
-			posts: postsService.get(),
-			isLoading: false
-		});
+		this.props.getPosts();
 	}
 
 	render() {
-		if (this.state.isLoading) {
+		if (this.props.isLoading) {
 			return (
 				<div className="loading">Loading...</div>
 			);
@@ -50,16 +25,21 @@ class MainContainer extends Component {
 			<Aux>
 				<NewPost
 					currentUser={currentUser}
-					add={this.add.bind(this)}
+					add={this.props.addPost}
 				/>
 				<Posts
-					posts={this.state.posts}
+					posts={this.props.posts}
 					userName={currentUser.name}
-					remove={this.remove.bind(this)}
+					remove={this.props.removePost}
 				/>
 			</Aux>
 		);
 	}
 }
 
-export default MainContainer;
+const mapStateToProps = (state) =>
+	({ posts: state.posts, isLoading: state.isLoading });
+const mapDispatchToProps = (dispatch) =>
+	bindActionCreators({ getPosts, addPost, removePost }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

@@ -81,6 +81,8 @@ class PostsService {
 				created: new Date()
 			});
 		posts.push(post);
+
+		return post;
 	}
 
 	remove(postId) {
