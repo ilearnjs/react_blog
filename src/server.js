@@ -3,6 +3,11 @@ import Express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router'
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk'
+
+import reducer from './reducers/index';
 import App from './App'
 
 const app = new Express();
@@ -13,14 +18,16 @@ app.use(Express.static('./dist', { index: false }));
 
 app.get('*', (req, res) => {
 	const context = {};
-
+	const store = createStore(reducer, undefined, applyMiddleware(thunk));
 	const markup = renderToString(
-		<StaticRouter
-			location={req.url}
-			context={context}
-		>
-			<App />
-		</StaticRouter>
+		<Provider store={store}>
+			<StaticRouter
+				location={req.url}
+				context={context}
+			>
+				<App />
+			</StaticRouter>
+		</Provider>
 	);
 
 	if (context.url) {
@@ -38,3 +45,4 @@ app.listen(8080, err => {
 		return console.error(err);
 	}
 });
+ 
