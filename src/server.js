@@ -5,17 +5,14 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router'
 import App from './App'
 
-// initialize the server and configure support for ejs templates
 const app = new Express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// define the folder that will be used for static assets
-app.use(Express.static('./dist'));
+app.use(Express.static('./dist', { index: false }));
 
-// universal routing and rendering
 app.get('*', (req, res) => {
-	const context = {}
+	const context = {};
 
 	const markup = renderToString(
 		<StaticRouter
@@ -24,24 +21,20 @@ app.get('*', (req, res) => {
 		>
 			<App />
 		</StaticRouter>
-	)
+	);
 
 	if (context.url) {
 		res.writeHead(301, {
 			Location: context.url
-		})
-		res.end()
+		});
+		res.end();
 	} else {
-		return res.render('index', { markup });
+		res.render('index', { markup });
 	}
 });
 
-// start the server
-const port = process.env.PORT || 3000;
-const env = process.env.NODE_ENV || 'production';
-app.listen(port, err => {
+app.listen(8080, err => {
 	if (err) {
 		return console.error(err);
 	}
-	console.info(`Server running on http://localhost:${port} [${env}]`);
 });
