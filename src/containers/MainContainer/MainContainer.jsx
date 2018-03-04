@@ -41,8 +41,7 @@ class MainContainer extends Component {
 	}
 }
 
-const mapStateToProps = (state) =>
-	({ posts: state.main.posts, isLoading: state.main.isLoading });
+const mapStateToProps = (state) => ({ ...state.main });
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators({ getPosts, addPost, removePost, stateReset }, dispatch);
 

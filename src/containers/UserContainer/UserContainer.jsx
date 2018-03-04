@@ -10,9 +10,8 @@ import postsService from '../../data/posts';
 import { getPosts, removePost, stateReset } from '../../reducers/uesr';
 
 class UserContainer extends Component {
-	userName = this.props.match.params.userName;
-
 	componentDidMount() {
+		this.userName = this.props.match.params.userName;
 		this.props.getPosts(this.userName);
 	}
 
@@ -42,8 +41,8 @@ class UserContainer extends Component {
 	}
 }
 
-const mapStateToProps = (state) =>
-	({ posts: state.user.posts, isLoading: state.user.isLoading });
+const mapStateToProps = (state, props) => ({ ...props, ...state.user });
+
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators({ getPosts, removePost, stateReset }, dispatch);
 
