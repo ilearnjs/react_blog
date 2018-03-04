@@ -1,19 +1,27 @@
 import postsService from './../data/posts';
 
-const POSTS_LOADED = 'main/posts_loaded';
-const POST_ADDED = 'main/post_added';
-const POST_REMOVED = 'main/post_removed';
-const STATE_RESET = 'main/reset';
+const USER_LOADED = 'user/user_loaded';
+const POSTS_LOADED = 'user/posts_loaded';
+const POST_REMOVED = 'user/post_removed';
+const STATE_RESET = 'user/reset';
 
 const initialState = {
 	isLoading: true,
 	posts: [],
 };
 
-export default function main(state = initialState, action) {
+export default function user(state = initialState, action) {
 	switch (action.type) {
 		case STATE_RESET:
 			return initialState;
+		case USER_LOADED:
+			return Object.assign(
+				{},
+				state,
+				{
+					user: action.user
+				}
+			);
 		case POSTS_LOADED:
 			return Object.assign(
 				{},
@@ -21,18 +29,6 @@ export default function main(state = initialState, action) {
 				{
 					isLoading: false,
 					posts: [...action.posts]
-				}
-			);
-
-		case POST_ADDED:
-			return Object.assign(
-				{},
-				state,
-				{
-					posts: [
-						action.post,
-						...state.posts
-					],
 				}
 			);
 
@@ -54,24 +50,13 @@ export default function main(state = initialState, action) {
 	}
 }
 
-export const getPosts = () => (dispatch) => {
+export const getPosts = (userName) => (dispatch) => {
 	// TODO: Server call
 	promise(
-		() => postsService.get(),
+		() => postsService.get(userName),
 		(data) => dispatch({
 			type: POSTS_LOADED,
 			posts: data
-		})
-	);
-}
-
-export const addPost = (content, userName) => (dispatch) => {
-	// TODO: Server call
-	promise(
-		() => postsService.create({ content }, userName),
-		(data) => dispatch({
-			type: POST_ADDED,
-			post: data
 		})
 	);
 }

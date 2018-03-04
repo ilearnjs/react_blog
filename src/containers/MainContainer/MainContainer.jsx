@@ -7,11 +7,15 @@ import Posts from '../../components/Posts/Posts';
 import NewPost from "../../components/NewPost/NewPost";
 import postsService from '../../data/posts';
 import currentUser from '../../data/currentUser';
-import { getPosts, addPost, removePost } from './../../reducers/main';
+import { getPosts, addPost, removePost, stateReset } from './../../reducers/main';
 
 class MainContainer extends Component {
 	componentDidMount() {
 		this.props.getPosts();
+	}
+
+	componentWillUnmount() {
+		this.props.stateReset();
 	}
 
 	render() {
@@ -38,8 +42,8 @@ class MainContainer extends Component {
 }
 
 const mapStateToProps = (state) =>
-	({ posts: state.posts, isLoading: state.isLoading });
+	({ posts: state.main.posts, isLoading: state.main.isLoading });
 const mapDispatchToProps = (dispatch) =>
-	bindActionCreators({ getPosts, addPost, removePost }, dispatch);
+	bindActionCreators({ getPosts, addPost, removePost, stateReset }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
