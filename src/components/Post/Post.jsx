@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 class Post extends Component {
 	onRemoveClicked() {
-		const { post: { id }, remove } = this.props;
+		const { post: { _id }, remove } = this.props;
 		
-		remove(id);
+		remove(_id);
 	}
 
 	render() {
@@ -23,7 +23,7 @@ class Post extends Component {
 							</span>
 						</Link>
 						<span className="created">
-							{post.created.toLocaleDateString()}
+							{(new Date(post.createdOn)).toLocaleDateString()}
 						</span>
 						{userName === post.user.name &&
 							<button className="remove-btn" onClick={() => this.onRemoveClicked()}>

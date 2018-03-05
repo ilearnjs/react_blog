@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Aux from "../Auxiliary/Auxiliary";
 import Posts from '../../components/Posts/Posts';
 import NewPost from "../../components/NewPost/NewPost";
-import postsService from '../../data/posts';
 import currentUser from '../../data/currentUser';
 import { getPosts, addPost, removePost, stateReset } from './../../reducers/main';
 

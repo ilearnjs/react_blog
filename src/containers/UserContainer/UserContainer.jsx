@@ -6,7 +6,6 @@ import Aux from '../Auxiliary/Auxiliary';
 import Posts from '../../components/Posts/Posts';
 import UserInfo from '../../components/UserInfo/UserInfo';
 import currentUser from '../../data/currentUser';
-import postsService from '../../data/posts';
 import { getPosts, removePost, stateReset } from '../../reducers/uesr';
 
 class UserContainer extends Component {

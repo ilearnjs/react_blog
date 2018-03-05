@@ -1,4 +1,6 @@
-import postsService from './../data/posts';
+import axios from 'axios';
+
+import { api_posts, api_posts_remove } from '../apiConstants';
 
 const POSTS_LOADED = 'main/posts_loaded';
 const POST_ADDED = 'main/post_added';
@@ -37,7 +39,7 @@ export default function main(state = initialState, action) {
 			);
 
 		case POST_REMOVED:
-			const index = state.posts.findIndex(p => p.id === action.postId);
+			const index = state.posts.findIndex(p => p._id === action.postId);
 			return Object.assign(
 				{},
 				state,
@@ -55,53 +57,38 @@ export default function main(state = initialState, action) {
 }
 
 export const getPosts = () => (dispatch) => {
-	// TODO: Server call
-	promise(
-		() => postsService.get(),
-		(data) => dispatch({
+	axios.get(api_posts)
+		.then(responce => dispatch({
 			type: POSTS_LOADED,
-			posts: data
-		})
-	);
+			posts: responce.data
+		}));
 }
 
-export const addPost = (content, userName) => (dispatch) => {
-	// TODO: Server call
-	promise(
-		() => postsService.create({ content }, userName),
-		(data) => dispatch({
+export const addPost = (content, name) => (dispatch) => {
+	const post = {
+		content,
+		user: {
+			name
+		},
+	};
+
+	axios.post(api_posts, post)
+		.then(responce => dispatch({
 			type: POST_ADDED,
-			post: data
-		})
-	);
+			post: responce.data
+		}));
 }
 
 export const removePost = (postId) => (dispatch) => {
-	// TODO: Server call
-	promise(
-		() => postsService.remove(postId),
-		(data) => dispatch({
+	axios.delete(api_posts_remove(postId))
+		.then(responce => dispatch({
 			type: POST_REMOVED,
 			postId: postId
-		})
-	);
+		}));
 }
 
 export const stateReset = () => (dispatch) => {
 	dispatch({
 		type: STATE_RESET
 	})
-}
-
-function promise(action, dispatch) {
-	return new Promise(resolve => {
-		setTimeout(
-			() => {
-				resolve(action());
-			},
-			1000
-		);
-	}).then((data) => {
-		dispatch(data);
-	});
 }
