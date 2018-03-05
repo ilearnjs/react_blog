@@ -10,7 +10,7 @@ import thunk from 'redux-thunk'
 import reducer from './reducers/index';
 import App from './App';
 
-const store = createStore(reducer, undefined, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(thunk));
 
 const app = (
 	<Provider store={store}>

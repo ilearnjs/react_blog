@@ -18,7 +18,7 @@ app.use(Express.static('./dist', { index: false }));
 
 app.get('*', (req, res) => {
 	const context = {};
-	const store = createStore(reducer, undefined, applyMiddleware(thunk));
+	const store = createStore(reducer, applyMiddleware(thunk));
 	const markup = renderToString(
 		<Provider store={store}>
 			<StaticRouter
