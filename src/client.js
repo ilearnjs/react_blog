@@ -6,16 +6,19 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk'
+import { renderRoutes } from "react-router-config";
 
+import routes from './routes';
 import reducer from './reducers/index';
 import App from './App';
 
-const store = createStore(reducer, applyMiddleware(thunk));
+console.log('Ser init state:', window.__INITIAL_STATE__);
+const store = createStore(reducer, window.__INITIAL_STATE__, applyMiddleware(thunk));
 
 const app = (
 	<Provider store={store}>
 		<BrowserRouter>
-			<App />
+			{renderRoutes(routes)}
 		</ BrowserRouter>
 	</Provider>
 );

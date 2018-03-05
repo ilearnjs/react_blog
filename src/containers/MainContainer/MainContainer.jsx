@@ -9,8 +9,14 @@ import currentUser from '../../data/currentUser';
 import { getPosts, addPost, removePost, stateReset } from './../../reducers/main';
 
 class MainContainer extends Component {
+	static ssrAction(store) {
+		return store.dispatch(getPosts(true));
+	}
+
 	componentDidMount() {
-		this.props.getPosts();
+		if (!this.props.ssr) {
+			this.props.getPosts();
+		}
 	}
 
 	componentWillUnmount() {

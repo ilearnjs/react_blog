@@ -10,6 +10,7 @@ const STATE_RESET = 'main/reset';
 const initialState = {
 	isLoading: true,
 	posts: [],
+	ssr: false,
 };
 
 export default function main(state = initialState, action) {
@@ -22,7 +23,8 @@ export default function main(state = initialState, action) {
 				state,
 				{
 					isLoading: false,
-					posts: [...action.posts]
+					posts: [...action.posts],
+					ssr: action.ssr
 				}
 			);
 
@@ -56,11 +58,12 @@ export default function main(state = initialState, action) {
 	}
 }
 
-export const getPosts = () => (dispatch) => {
-	axios.get(api_posts)
+export const getPosts = (ssr) => (dispatch) => {
+	return axios.get(api_posts)
 		.then(responce => dispatch({
 			type: POSTS_LOADED,
-			posts: responce.data
+			posts: responce.data,
+			ssr: ssr
 		}));
 }
 
@@ -90,5 +93,5 @@ export const removePost = (postId) => (dispatch) => {
 export const stateReset = () => (dispatch) => {
 	dispatch({
 		type: STATE_RESET
-	})
+	});
 }

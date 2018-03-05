@@ -6,9 +6,12 @@ import { StaticRouter } from 'react-router'
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk'
+import { matchRoutes, renderRoutes } from 'react-router-config';
 
 import reducer from './reducers/index';
 import App from './App'
+import routes from './routes';
+import { ssr } from './reducers/main';
 
 const app = new Express();
 app.set('view engine', 'ejs');
@@ -16,28 +19,36 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(Express.static('./dist', { index: false }));
 
-app.get('*', (req, res) => {
-	const context = {};
-	const store = createStore(reducer, applyMiddleware(thunk));
-	const markup = renderToString(
-		<Provider store={store}>
-			<StaticRouter
-				location={req.url}
-				context={context}
-			>
-				<App />
-			</StaticRouter>
-		</Provider>
-	);
+const store = createStore(reducer, applyMiddleware(thunk));
 
-	if (context.url) {
-		res.writeHead(301, {
-			Location: context.url
-		});
-		res.end();
-	} else {
-		res.render('index', { markup });
-	}
+app.get('*', (req, res) => {
+	const branch = matchRoutes(routes, req.url);
+	const promises = branch.map(({ route }) => {
+		let ssrAction = route.component.ssrAction;
+		return ssrAction instanceof Function ? ssrAction(store) : Promise.resolve();
+	});
+	return Promise.all(promises).then((data) => {
+		const context = {};
+		const markup = renderToString(
+			<Provider store={store}>
+				<StaticRouter
+					location={req.url}
+					context={context}
+				>
+					{renderRoutes(routes)}
+				</StaticRouter>
+			</Provider>
+		);
+
+		if (context.url) {
+			res.writeHead(301, {
+				Location: context.url
+			});
+			res.end();
+		} else {
+			res.render('index', { data: store.getState(), markup });
+		}
+	});
 });
 
 app.listen(8080, err => {
@@ -45,4 +56,3 @@ app.listen(8080, err => {
 		return console.error(err);
 	}
 });
- 

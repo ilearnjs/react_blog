@@ -8,6 +8,9 @@
 </head>
 
 <body>
+	<script>
+		window.__INITIAL_STATE__ = <%- JSON.stringify(data) -%>
+	</script>
 	<div id="root"><%- markup -%></div>
 	<script type="text/javascript" src="/bundle.js"></script>
 </body>
