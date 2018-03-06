@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start-client": "CLIENT_MODE=true webpack-dev-server",
-    "start-server": "webpack && NODE_PATH=./src nodemon server.js"
+    "start-server": "webpack && nodemon server.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -12,6 +12,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
+    "copy-webpack-plugin": "^4.5.0",
     "css-loader": "^0.28.10",
     "html-webpack-plugin": "^2.30.1",
     "nodemon": "^1.17.1",

@@ -2,6 +2,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	entry: `${__dirname}/src/client.js`,
@@ -41,5 +42,11 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: `${__dirname}/src/index.html`
 		}),
+		new CopyWebpackPlugin([
+			{
+				from: `${__dirname}/src/style.css`,
+				to: 'style.css'
+			}
+		])
 	],
 };
