@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Aux from "../Auxiliary/Auxiliary";
 import Posts from '../../components/Posts/Posts';
 import NewPost from "../../components/NewPost/NewPost";
-import currentUser from '../../data/currentUser';
 import { getPosts, addPost, removePost, stateReset } from './../../reducers/main';
 
 class MainContainer extends Component {
@@ -30,15 +29,18 @@ class MainContainer extends Component {
 			);
 		}
 
+		const currentUser = this.props.user;
 		return (
 			<Aux>
-				<NewPost
-					currentUser={currentUser}
-					add={this.props.addPost}
-				/>
+				{currentUser &&
+					<NewPost
+						currentUser={currentUser}
+						add={this.props.addPost}
+					/>
+				}
 				<Posts
 					posts={this.props.posts}
-					userName={currentUser.name}
+					currentUser={currentUser}
 					remove={this.props.removePost}
 				/>
 			</Aux>
@@ -46,7 +48,7 @@ class MainContainer extends Component {
 	}
 }
 
-const mapStateToProps = (state) => ({ ...state.main });
+const mapStateToProps = (state) => ({ ...state.main, ...state.login });
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators({ getPosts, addPost, removePost, stateReset }, dispatch);
 

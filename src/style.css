@@ -11,6 +11,15 @@ body {
     margin: auto;
 }
 
+.header {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.link {
+	margin-left: 10px;
+}
+
 .posts {
 	background: white;
     border: 1px solid #65768a;
@@ -26,6 +35,10 @@ body {
 	margin-left: 85px;
     position: relative;
     padding: 20px;
+}
+
+.post-content > .header {
+	display: block;
 }
 
 .new-post {
@@ -122,4 +135,26 @@ body {
 
 .remove-btn {
 	float: right;
+}
+
+.log-in-form {
+    padding: 20px 150px;
+}
+
+.user-name-label {
+	width: 100px;
+    display: inline-block;
+}
+
+.user-name-input {
+	width: 150px;
+}
+
+.password-label {
+	width: 100px;
+    display: inline-block;
+}
+
+.password-input {
+	width: 150px;
 }

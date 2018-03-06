@@ -6,7 +6,7 @@ import Aux from '../Auxiliary/Auxiliary';
 import Posts from '../../components/Posts/Posts';
 import UserInfo from '../../components/UserInfo/UserInfo';
 import currentUser from '../../data/currentUser';
-import { setUser, getPosts, removePost, stateReset } from '../../reducers/uesr';
+import { setUser, getPosts, removePost, stateReset } from '../../reducers/user';
 
 class UserContainer extends Component {
 	static ssrAction(store, match) {
@@ -40,7 +40,7 @@ class UserContainer extends Component {
 				/>
 				<Posts
 					posts={this.props.posts}
-					userName={currentUser.name}
+					currentUser={this.props.user}
 					remove={this.props.removePost}
 				/>
 			</Aux>
@@ -48,7 +48,7 @@ class UserContainer extends Component {
 	}
 }
 
-const mapStateToProps = (state, props) => ({ ...state.user, ...props });
+const mapStateToProps = (state, props) => ({ ...state.user, ...state.login, ...props });
 
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators({ setUser, getPosts, removePost, stateReset }, dispatch);

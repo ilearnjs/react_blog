@@ -9,7 +9,7 @@ class Post extends Component {
 	}
 
 	render() {
-		const { post, userName } = this.props;
+		const { post, currentUser } = this.props;
 
 		return (
 			<div className="post">
@@ -25,7 +25,7 @@ class Post extends Component {
 						<span className="created">
 							{(new Date(post.createdOn)).toLocaleDateString()}
 						</span>
-						{userName === post.user.name &&
+						{currentUser && currentUser.name === post.user.name &&
 							<button className="remove-btn" onClick={() => this.onRemoveClicked()}>
 								Remove
 							</button>

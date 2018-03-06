@@ -1,6 +1,7 @@
 import App from './App';
 import MainContainer from './containers/MainContainer/MainContainer';
 import UserContainer from './containers/UserContainer/UserContainer';
+import LoginContainer from './containers/LoginContainer/LoginContainer';
 
 const routes = [
 	{
@@ -9,11 +10,15 @@ const routes = [
 			{
 				path: '/',
 				exact: true,
-				component: MainContainer,
+				component: MainContainer
 			},
 			{
 				path: '/user/:userName',
 				component: UserContainer
+			},
+			{
+				path: '/login',
+				component: LoginContainer
 			}
 		]
 	}
