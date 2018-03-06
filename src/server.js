@@ -17,7 +17,7 @@ const app = new Express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(Express.static('./dist', { index: false }));
+app.use(Express.static('./dist', { index: false, }));
 
 app.get('*', (req, res) => {
 	const store = createStore(reducer, applyMiddleware(thunk));
