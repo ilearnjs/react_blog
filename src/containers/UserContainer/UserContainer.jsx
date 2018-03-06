@@ -6,12 +6,20 @@ import Aux from '../Auxiliary/Auxiliary';
 import Posts from '../../components/Posts/Posts';
 import UserInfo from '../../components/UserInfo/UserInfo';
 import currentUser from '../../data/currentUser';
-import { getPosts, removePost, stateReset } from '../../reducers/uesr';
+import { setUser, getPosts, removePost, stateReset } from '../../reducers/uesr';
 
 class UserContainer extends Component {
+	static ssrAction(store, match) {
+		store.dispatch(setUser(match.params.userName));
+		return store.dispatch(getPosts(match.params.userName, true));
+	}
+
 	componentDidMount() {
-		this.userName = this.props.match.params.userName;
-		this.props.getPosts(this.userName);
+		if (!this.props.ssr) {
+			const userName = this.props.match.params.userName;
+			this.props.setUser(userName); // TODO Ask
+			this.props.getPosts(userName);
+		}
 	}
 
 	componentWillUnmount() {
@@ -28,7 +36,7 @@ class UserContainer extends Component {
 		return (
 			<Aux>
 				<UserInfo
-					userName={this.userName}
+					userName={this.props.userName}
 				/>
 				<Posts
 					posts={this.props.posts}
@@ -40,9 +48,9 @@ class UserContainer extends Component {
 	}
 }
 
-const mapStateToProps = (state, props) => ({ ...props, ...state.user });
+const mapStateToProps = (state, props) => ({ ...state.user, ...props });
 
 const mapDispatchToProps = (dispatch) =>
-	bindActionCreators({ getPosts, removePost, stateReset }, dispatch);
+	bindActionCreators({ setUser, getPosts, removePost, stateReset }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserContainer);

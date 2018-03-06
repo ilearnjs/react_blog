@@ -12,7 +12,6 @@ import routes from './routes';
 import reducer from './reducers/index';
 import App from './App';
 
-console.log('Ser init state:', window.__INITIAL_STATE__);
 const store = createStore(reducer, window.__INITIAL_STATE__, applyMiddleware(thunk));
 
 const app = (

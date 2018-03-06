@@ -2,27 +2,40 @@ import axios from 'axios';
 
 import { api_posts, api_posts_user, api_posts_remove } from '../apiConstants';
 
-const USER_LOADED = 'user/user_loaded';
+const USERNAME_SET = 'user/username_set';
 const POSTS_LOADED = 'user/posts_loaded';
 const POST_REMOVED = 'user/post_removed';
 const STATE_RESET = 'user/reset';
 
 const initialState = {
+	userName: null,
 	isLoading: true,
 	posts: [],
+	ssr: false
 };
 
 export default function user(state = initialState, action) {
 	switch (action.type) {
 		case STATE_RESET:
 			return initialState;
+
+		case USERNAME_SET:
+			return Object.assign(
+				{},
+				state,
+				{
+					userName: action.userName
+				}
+			);
+
 		case POSTS_LOADED:
 			return Object.assign(
 				{},
 				state,
 				{
 					isLoading: false,
-					posts: [...action.posts]
+					posts: [...action.posts],
+					ssr: action.ssr
 				}
 			);
 
@@ -44,16 +57,24 @@ export default function user(state = initialState, action) {
 	}
 }
 
-export const getPosts = (userName) => (dispatch) => {
-	axios.get(api_posts_user(userName))
+export const setUser = (userName) => (dispatch) => {
+	return dispatch({
+		type: USERNAME_SET,
+		userName: userName
+	});
+}
+
+export const getPosts = (userName, ssr) => (dispatch) => {
+	return axios.get(api_posts_user(userName))
 		.then(responce => dispatch({
 			type: POSTS_LOADED,
-			posts: responce.data
+			posts: responce.data,
+			ssr
 		}));
 }
 
 export const removePost = (postId) => (dispatch) => {
-	axios.delete(api_posts_remove(postId))
+	return axios.delete(api_posts_remove(postId))
 		.then(responce => dispatch({
 			type: POST_REMOVED,
 			postId: postId
@@ -61,7 +82,7 @@ export const removePost = (postId) => (dispatch) => {
 }
 
 export const stateReset = () => (dispatch) => {
-	dispatch({
+	return dispatch({
 		type: STATE_RESET
-	})
+	});
 }

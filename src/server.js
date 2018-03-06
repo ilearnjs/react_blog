@@ -19,13 +19,12 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(Express.static('./dist', { index: false }));
 
-const store = createStore(reducer, applyMiddleware(thunk));
-
 app.get('*', (req, res) => {
+	const store = createStore(reducer, applyMiddleware(thunk));
 	const branch = matchRoutes(routes, req.url);
-	const promises = branch.map(({ route }) => {
+	const promises = branch.map(({ route, match }) => {
 		let ssrAction = route.component.ssrAction;
-		return ssrAction instanceof Function ? ssrAction(store) : Promise.resolve();
+		return ssrAction instanceof Function ? ssrAction(store, match) : Promise.resolve();
 	});
 	return Promise.all(promises).then((data) => {
 		const context = {};

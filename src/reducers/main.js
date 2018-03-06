@@ -63,7 +63,7 @@ export const getPosts = (ssr) => (dispatch) => {
 		.then(responce => dispatch({
 			type: POSTS_LOADED,
 			posts: responce.data,
-			ssr: ssr
+			ssr
 		}));
 }
 
@@ -75,7 +75,7 @@ export const addPost = (content, name) => (dispatch) => {
 		},
 	};
 
-	axios.post(api_posts, post)
+	return axios.post(api_posts, post)
 		.then(responce => dispatch({
 			type: POST_ADDED,
 			post: responce.data
@@ -83,7 +83,7 @@ export const addPost = (content, name) => (dispatch) => {
 }
 
 export const removePost = (postId) => (dispatch) => {
-	axios.delete(api_posts_remove(postId))
+	return axios.delete(api_posts_remove(postId))
 		.then(responce => dispatch({
 			type: POST_REMOVED,
 			postId: postId
@@ -91,7 +91,7 @@ export const removePost = (postId) => (dispatch) => {
 }
 
 export const stateReset = () => (dispatch) => {
-	dispatch({
+	return dispatch({
 		type: STATE_RESET
 	});
 }
