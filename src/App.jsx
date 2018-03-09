@@ -8,7 +8,7 @@ const app = (props) => {
 		<Aux>
 			<div className="header">
 				<Link className="link" to="/login">Log in</Link>
-				{/* <Link className="link" to="/signup">Sign up</Link> */}
+				<Link className="link" to="/signup">Sign up</Link>
 			</div>
 			{(renderRoutes(props.route.routes))}
 		</Aux>

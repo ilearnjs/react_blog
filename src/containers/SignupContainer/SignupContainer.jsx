@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import login from '../../reducers/login';
-import { loginAction } from '../../reducers/login';
+import { signupAction } from '../../reducers/login';
 
 class LoginContainer extends Component {
 	state = {
@@ -26,12 +26,12 @@ class LoginContainer extends Component {
 		});
 	}
 
-	onLogInClick() {
+	onSignupClick() {
 		if (!this.state.userName || !this.state.password) {
 			return;
 		}
 
-		this.props.loginAction(this.state.userName, this.state.password);
+		this.props.signupAction(this.state.userName, this.state.password);
 	}
 
 	render() {
@@ -65,8 +65,8 @@ class LoginContainer extends Component {
 					>
 					</input>
 				</div>
-				<button onClick={() => this.onLogInClick()}>
-					Log In
+				<button onClick={() => this.onSignupClick()}>
+					Sign Up
 				</button>
 			</div>
 		);
@@ -74,6 +74,6 @@ class LoginContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({ ...state.login });
-const mapDispatchToProps = (dispatch) => bindActionCreators({ loginAction }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ signupAction }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

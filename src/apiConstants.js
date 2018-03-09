@@ -1,6 +1,7 @@
 export const api = 'http://localhost:3000';
 
-export const api_login = `${api}/login`;
+export const api_login = `${api}/user/login`;
+export const api_signup = `${api}/user/signup`;
 
 export const api_posts = `${api}/posts`;
 export const api_posts_user = (userName) => `${api_posts}/user/${userName}`;
