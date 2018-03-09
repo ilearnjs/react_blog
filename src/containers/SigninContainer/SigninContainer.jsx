@@ -3,10 +3,9 @@ import { Redirect } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import login from '../../reducers/login';
-import { loginAction } from '../../reducers/login';
+import { signinAction } from '../../reducers/sign';
 
-class LoginContainer extends Component {
+class SigninContainer extends Component {
 	state = {
 		userName: '',
 		password: ''
@@ -26,12 +25,12 @@ class LoginContainer extends Component {
 		});
 	}
 
-	onLogInClick() {
+	onSigninClick() {
 		if (!this.state.userName || !this.state.password) {
 			return;
 		}
 
-		this.props.loginAction(this.state.userName, this.state.password);
+		this.props.signinAction(this.state.userName, this.state.password);
 	}
 
 	render() {
@@ -65,15 +64,15 @@ class LoginContainer extends Component {
 					>
 					</input>
 				</div>
-				<button onClick={() => this.onLogInClick()}>
-					Log In
+				<button onClick={() => this.onSigninClick()}>
+					Sign In
 				</button>
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = (state) => ({ ...state.login });
-const mapDispatchToProps = (dispatch) => bindActionCreators({ loginAction }, dispatch);
+const mapStateToProps = (state) => ({ ...state.sign });
+const mapDispatchToProps = (dispatch) => bindActionCreators({ signinAction }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SigninContainer);

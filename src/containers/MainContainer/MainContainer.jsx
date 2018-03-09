@@ -30,6 +30,7 @@ class MainContainer extends Component {
 		}
 
 		const currentUser = this.props.user;
+		
 		return (
 			<Aux>
 				{currentUser &&
@@ -48,7 +49,7 @@ class MainContainer extends Component {
 	}
 }
 
-const mapStateToProps = (state) => ({ ...state.main, ...state.login });
+const mapStateToProps = (state) => ({ ...state.main, ...state.sign });
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators({ getPosts, addPost, removePost, stateReset }, dispatch);
 

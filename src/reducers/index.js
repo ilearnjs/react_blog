@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import main from './main';
 import user from './user';
-import login from './login';
+import sign from './sign';
 
 export default combineReducers({
 	main,
 	user,
-	login
+	sign
 });

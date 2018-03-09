@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Aux from '../Auxiliary/Auxiliary';
 import Posts from '../../components/Posts/Posts';
 import UserInfo from '../../components/UserInfo/UserInfo';
-import currentUser from '../../data/currentUser';
 import { setUser, getPosts, removePost, stateReset } from '../../reducers/user';
 
 class UserContainer extends Component {
@@ -48,7 +47,7 @@ class UserContainer extends Component {
 	}
 }
 
-const mapStateToProps = (state, props) => ({ ...state.user, ...state.login, ...props });
+const mapStateToProps = (state, props) => ({ ...state.user, ...state.sign, ...props });
 
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators({ setUser, getPosts, removePost, stateReset }, dispatch);

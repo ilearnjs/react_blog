@@ -3,10 +3,9 @@ import { Redirect } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import login from '../../reducers/login';
-import { signupAction } from '../../reducers/login';
+import { signupAction } from '../../reducers/sign';
 
-class LoginContainer extends Component {
+class SignupContainer extends Component {
 	state = {
 		userName: '',
 		password: ''
@@ -35,8 +34,8 @@ class LoginContainer extends Component {
 	}
 
 	render() {
-		if(this.props.user) {
-			return <Redirect to="/"/>
+		if (this.props.user) {
+			return <Redirect to="/" />
 		}
 		return (
 			<div className="log-in-form">
@@ -73,7 +72,7 @@ class LoginContainer extends Component {
 	}
 }
 
-const mapStateToProps = (state) => ({ ...state.login });
+const mapStateToProps = (state) => ({ ...state.sign });
 const mapDispatchToProps = (dispatch) => bindActionCreators({ signupAction }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SignupContainer);
