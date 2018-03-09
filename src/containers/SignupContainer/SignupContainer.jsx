@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { signupAction } from '../../reducers/sign';
+import { signup } from '../../reducers/sign';
 
 class SignupContainer extends Component {
 	state = {
@@ -30,41 +30,59 @@ class SignupContainer extends Component {
 			return;
 		}
 
-		this.props.signupAction(this.state.userName, this.state.password);
+		this.props.signup(this.state.userName, this.state.password);
 	}
 
 	render() {
 		if (this.props.user) {
 			return <Redirect to="/" />
 		}
+
 		return (
-			<div className="log-in-form">
-				<div className="user-name-container">
-					<label className="user-name-label" htmlFor="user-name">
+			<div className="sign-form">
+				<div className="sign-header">
+					Sign up
+				</div>
+				{this.props.error &&
+					<div className="sign-error">
+						{this.props.error.message}
+					</div>
+				}
+				<div className="sign-input-container">
+					<label
+						className="sign-label"
+						htmlFor="user-name"
+					>
 						User name
 					</label>
 					<input
 						id="user-name"
-						className="user-name-input"
+						className="sign-input"
 						type="text"
 						value={this.state.userName}
 						onChange={(e) => this.onUserNameChanged(e)}
 					>
 					</input>
 				</div>
-				<div className="password-container">
-					<label className="password-label" htmlFor="password">
+				<div className="sign-input-container">
+					<label
+						className="sign-label"
+						htmlFor="password"
+					>
 						Password
 					</label>
 					<input
-						className="password-input"
+						className="sign-input"
 						type="password"
 						value={this.state.password}
 						onChange={(e) => this.onPasswordChanged(e)}
 					>
 					</input>
 				</div>
-				<button onClick={() => this.onSignupClick()}>
+				<button
+					className="sign-button"
+					onClick={() => this.onSignupClick()}
+				>
 					Sign Up
 				</button>
 			</div>
@@ -73,6 +91,6 @@ class SignupContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({ ...state.sign });
-const mapDispatchToProps = (dispatch) => bindActionCreators({ signupAction }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ signup }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupContainer);

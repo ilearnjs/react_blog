@@ -15,6 +15,7 @@ body {
 .header {
 	display: flex;
 	justify-content: space-between;
+	margin: 10px;
 }
 
 .link {
@@ -138,24 +139,35 @@ body {
 	float: right;
 }
 
-.log-in-form {
-    padding: 20px 150px;
+.sign-form {
+	padding: 20px 150px;
+	border: 1px solid;
+    background: white;
 }
 
-.user-name-label {
+.sign-header {
+	margin: 20px;
+    font-size: 25px;
+}
+
+.sign-error {
+	margin: 20px;
+    color: red;
+}
+
+.sign-input-container {
+	margin: 20px;
+}
+
+.sign-label {
 	width: 100px;
     display: inline-block;
 }
 
-.user-name-input {
+.sign-input {
 	width: 150px;
 }
 
-.password-label {
-	width: 100px;
-    display: inline-block;
-}
-
-.password-input {
-	width: 150px;
+.sign-button {
+	margin: 20px;
 }

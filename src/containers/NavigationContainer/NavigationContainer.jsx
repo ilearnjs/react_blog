@@ -3,11 +3,11 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { signoutAction } from './../../reducers/sign';
+import { signout } from './../../reducers/sign';
 
 class NavigationContainer extends Component {
 	onSignoutClick() {
-		this.props.signoutAction();
+		this.props.signout();
 	}
 
 	render() {
@@ -40,6 +40,6 @@ class NavigationContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({ ...state.sign });
-const mapDispatchToProps = (dispatch) => bindActionCreators({ signoutAction }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ signout }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavigationContainer);

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { signinAction } from '../../reducers/sign';
+import { signin } from '../../reducers/sign';
 
 class SigninContainer extends Component {
 	state = {
@@ -30,41 +30,53 @@ class SigninContainer extends Component {
 			return;
 		}
 
-		this.props.signinAction(this.state.userName, this.state.password);
+		this.props.signin(this.state.userName, this.state.password);
 	}
 
 	render() {
-		if(this.props.user) {
-			return <Redirect to="/"/>
+		if (this.props.user) {
+			return <Redirect to="/" />
 		}
 		return (
-			<div className="log-in-form">
-				<div className="user-name-container">
-					<label className="user-name-label" htmlFor="user-name">
+			<div className="sign-form">
+				<div className="sign-header">
+					Sign in
+				</div>
+				<div className="sign-input-container">
+					<label
+						className="sign-label"
+						htmlFor="user-name"
+					>
 						User name
 					</label>
 					<input
 						id="user-name"
-						className="user-name-input"
+						className="sign-input"
 						type="text"
 						value={this.state.userName}
 						onChange={(e) => this.onUserNameChanged(e)}
 					>
 					</input>
 				</div>
-				<div className="password-container">
-					<label className="password-label" htmlFor="password">
+				<div className="sign-input-container">
+					<label
+						className="sign-label"
+						htmlFor="password"
+					>
 						Password
 					</label>
 					<input
-						className="password-input"
+						className="sign-input"
 						type="password"
 						value={this.state.password}
 						onChange={(e) => this.onPasswordChanged(e)}
 					>
 					</input>
 				</div>
-				<button onClick={() => this.onSigninClick()}>
+				<button
+					className="sign-button"
+					onClick={() => this.onSigninClick()}
+				>
 					Sign In
 				</button>
 			</div>
@@ -73,6 +85,6 @@ class SigninContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({ ...state.sign });
-const mapDispatchToProps = (dispatch) => bindActionCreators({ signinAction }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ signin }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SigninContainer);

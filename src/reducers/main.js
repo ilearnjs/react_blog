@@ -60,9 +60,9 @@ export default function main(state = initialState, action) {
 
 export const getPosts = (ssr) => (dispatch) => {
 	return axios.get(api_posts)
-		.then(responce => dispatch({
+		.then(response => dispatch({
 			type: POSTS_LOADED,
-			posts: responce.data,
+			posts: response.data,
 			ssr
 		}));
 }
@@ -76,15 +76,15 @@ export const addPost = (content, name) => (dispatch) => {
 	};
 
 	return axios.post(api_posts, post)
-		.then(responce => dispatch({
+		.then(response => dispatch({
 			type: POST_ADDED,
-			post: responce.data
+			post: response.data
 		}));
 }
 
 export const removePost = (postId) => (dispatch) => {
 	return axios.delete(api_posts_remove(postId))
-		.then(responce => dispatch({
+		.then(response => dispatch({
 			type: POST_REMOVED,
 			postId: postId
 		}));

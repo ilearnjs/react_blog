@@ -66,16 +66,16 @@ export const setUser = (userName) => (dispatch) => {
 
 export const getPosts = (userName, ssr) => (dispatch) => {
 	return axios.get(api_posts_user(userName))
-		.then(responce => dispatch({
+		.then(response => dispatch({
 			type: POSTS_LOADED,
-			posts: responce.data,
+			posts: response.data,
 			ssr
 		}));
 }
 
 export const removePost = (postId) => (dispatch) => {
 	return axios.delete(api_posts_remove(postId))
-		.then(responce => dispatch({
+		.then(response => dispatch({
 			type: POST_REMOVED,
 			postId: postId
 		}));
