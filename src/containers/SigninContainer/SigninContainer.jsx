@@ -3,13 +3,17 @@ import { Redirect } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { signin } from '../../reducers/sign';
+import { signin, stateReset } from '../../reducers/sign';
 
 class SigninContainer extends Component {
 	state = {
 		userName: '',
 		password: ''
 	};
+
+	componentWillUnmount() {
+		this.props.stateReset();
+	}
 
 	onUserNameChanged(e) {
 		this.setState({
@@ -42,6 +46,11 @@ class SigninContainer extends Component {
 				<div className="sign-header">
 					Sign in
 				</div>
+				{this.props.error &&
+					<div className="sign-error">
+						{this.props.error.userMessage}
+					</div>
+				}
 				<div className="sign-input-container">
 					<label
 						className="sign-label"
@@ -85,6 +94,7 @@ class SigninContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({ ...state.sign });
-const mapDispatchToProps = (dispatch) => bindActionCreators({ signin }, dispatch);
+const mapDispatchToProps = (dispatch) =>
+	bindActionCreators({ signin, stateReset }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SigninContainer);

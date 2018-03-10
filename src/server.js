@@ -50,8 +50,4 @@ app.get('*', (req, res) => {
 	});
 });
 
-app.listen(8080, err => {
-	if (err) {
-		return console.error(err);
-	}
-});
+app.listen(8080);

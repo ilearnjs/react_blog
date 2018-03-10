@@ -3,13 +3,17 @@ import { Redirect } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { signup } from '../../reducers/sign';
+import { signup, stateReset } from '../../reducers/sign';
 
 class SignupContainer extends Component {
 	state = {
 		userName: '',
 		password: ''
 	};
+
+	componentWillUnmount() {
+		this.props.stateReset();
+	}
 
 	onUserNameChanged(e) {
 		this.setState({
@@ -45,7 +49,7 @@ class SignupContainer extends Component {
 				</div>
 				{this.props.error &&
 					<div className="sign-error">
-						{this.props.error.message}
+						{this.props.error.userMessage}
 					</div>
 				}
 				<div className="sign-input-container">
@@ -91,6 +95,7 @@ class SignupContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({ ...state.sign });
-const mapDispatchToProps = (dispatch) => bindActionCreators({ signup }, dispatch);
+const mapDispatchToProps = (dispatch) => 
+	bindActionCreators({ signup, stateReset }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupContainer);

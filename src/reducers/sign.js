@@ -5,6 +5,7 @@ import { api_signin, api_signup } from '../apiConstants';
 const USER_SIGNED_IN = 'sign/user_signed_in';
 const USER_SIGNED_OUT = 'sign/user_signed_out';
 const USER_ERROR = 'sign/error';
+const STATE_RESET = 'sign/reset';
 
 const initialState = {
 	user: null,
@@ -13,6 +14,14 @@ const initialState = {
 
 export default function sign(state = initialState, action) {
 	switch (action.type) {
+		case STATE_RESET:
+			return Object.assign(
+				{},
+				state,
+				{
+					error: null,
+				}
+			);
 		case USER_SIGNED_IN:
 			return Object.assign(
 				{},
@@ -23,7 +32,6 @@ export default function sign(state = initialState, action) {
 			);
 
 		case USER_ERROR:
-			console.log(action.error);
 			return Object.assign(
 				{},
 				state,
@@ -81,5 +89,11 @@ export const signup = (userName, password) => (dispatch) => {
 export const signout = () => (dispatch) => {
 	return dispatch({
 		type: USER_SIGNED_OUT
+	});
+}
+
+export const stateReset = () => (dispatch) => {
+	return dispatch({
+		type: STATE_RESET
 	});
 }
