@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { api_signin, api_signup } from '../apiConstants';
+import { removeToken, setToken } from '../services/tokenService';
 
 const USER_SIGNED_IN = 'sign/user_signed_in';
 const USER_SIGNED_OUT = 'sign/user_signed_out';
@@ -53,12 +54,13 @@ export const signin = (userName, password) => (dispatch) => {
 		userName,
 		password
 	})
-		.then(response =>
+		.then(response => {
+			setToken(response.data.token);
 			dispatch({
 				type: USER_SIGNED_IN,
-				user: response.data
-			})
-		)
+				user: response.data.user
+			});
+		})
 		.catch(error =>
 			dispatch({
 				type: USER_ERROR,
@@ -72,12 +74,13 @@ export const signup = (userName, password) => (dispatch) => {
 		userName,
 		password
 	})
-		.then(response =>
+		.then(response => {
+			setToken(response.data.token);
 			dispatch({
 				type: USER_SIGNED_IN,
-				user: response.data
-			})
-		)
+				user: response.data.user
+			});
+		})
 		.catch(error =>
 			dispatch({
 				type: USER_ERROR,
@@ -87,6 +90,7 @@ export const signup = (userName, password) => (dispatch) => {
 }
 
 export const signout = () => (dispatch) => {
+	removeToken();
 	return dispatch({
 		type: USER_SIGNED_OUT
 	});

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 class Post extends Component {
 	onRemoveClicked() {
-		const { post: { _id }, remove } = this.props;
+		const { post: { _id }, removePost } = this.props;
 		
-		remove(_id);
+		removePost(_id);
 	}
 
 	render() {

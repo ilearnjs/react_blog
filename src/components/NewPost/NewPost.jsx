@@ -13,12 +13,12 @@ class NewPost extends Component {
 		});
 	}
 
-	onSendClick() {
+	onPostClick() {
 		if (!this.state.content) {
 			return;
 		}
 
-		this.props.add(this.state.content, this.currentUser.name);
+		this.props.addPost(this.state.content);
 		this.setState({
 			content: ''
 		});
@@ -44,7 +44,7 @@ class NewPost extends Component {
 						value={this.state.content}
 						onChange={(e) => this.onContentChanged(e)}
 					></textarea>
-					<button onClick={() => this.onSendClick()}>
+					<button onClick={() => this.onPostClick()}>
 						Post
 					</button>
 				</div>

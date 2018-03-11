@@ -36,13 +36,13 @@ class MainContainer extends Component {
 				{currentUser &&
 					<NewPost
 						currentUser={currentUser}
-						add={this.props.addPost}
+						addPost={this.props.addPost}
 					/>
 				}
 				<Posts
 					posts={this.props.posts}
 					currentUser={currentUser}
-					remove={this.props.removePost}
+					removePost={this.props.removePost}
 				/>
 			</Aux>
 		);

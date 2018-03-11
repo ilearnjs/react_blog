@@ -56,7 +56,7 @@ class SigninContainer extends Component {
 						className="sign-label"
 						htmlFor="user-name"
 					>
-						User name
+						Username
 					</label>
 					<input
 						id="user-name"

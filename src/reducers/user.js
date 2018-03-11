@@ -74,7 +74,7 @@ export const getPosts = (userName, ssr) => (dispatch) => {
 }
 
 export const removePost = (postId) => (dispatch) => {
-	return axios.delete(api_posts_remove(postId))
+	return axios.delete(api_posts_remove(postId), getAxiosConfig())
 		.then(response => dispatch({
 			type: POST_REMOVED,
 			postId: postId
@@ -85,4 +85,12 @@ export const stateReset = () => (dispatch) => {
 	return dispatch({
 		type: STATE_RESET
 	});
+}
+
+function getAxiosConfig() {
+	return {
+		headers: {
+			'Authorization': getToken()
+		}
+	};
 }

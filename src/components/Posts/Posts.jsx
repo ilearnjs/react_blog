@@ -1,7 +1,7 @@
 import React from "react";
 import Post from '../../components/Post/Post';
 
-const posts = ({ posts, currentUser, remove }) => {
+const posts = ({ posts, currentUser, removePost }) => {
 	if (!posts.length) {
 		return (
 			<span>Nothing posted yet</span>
@@ -10,7 +10,7 @@ const posts = ({ posts, currentUser, remove }) => {
 
 	return (
 		<div className="posts">
-			{posts.map(p => <Post key={p._id} post={p} currentUser={currentUser} remove={remove} />)}
+			{posts.map(p => <Post key={p._id} post={p} currentUser={currentUser} removePost={removePost} />)}
 		</div>
 	);
 }
