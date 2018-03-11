@@ -10,12 +10,18 @@ class Post extends Component {
 
 	render() {
 		const { post, currentUser } = this.props;
+		const avatarStyle = {
+			backgroundImage: `url(https://api.adorable.io/avatars/60/${post.user.name})`,
+		};
 
 		return (
 			<div className="post">
 				<div className="post-content">
 					<div className="header">
-						<div className={`avatar ${post.user.name}`}>
+						<div
+							className={`avatar ${post.user.name}`}
+							style={avatarStyle}
+						>
 						</div>
 						<Link to={`/user/${post.user.name}`}>
 							<span className="name">
