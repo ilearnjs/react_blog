@@ -44,8 +44,7 @@ module.exports = {
 		}),
 		new CopyWebpackPlugin([
 			{
-				from: `${__dirname}/src/style.css`,
-				to: 'style.css'
+				from: `${__dirname}/src/static`
 			}
 		])
 	],
