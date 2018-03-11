@@ -1,4 +1,4 @@
-export const api = 'http://localhost:3000';
+export const api = 'http://localhost:3000/api';
 
 export const api_signin = `${api}/user/signin`;
 export const api_signup = `${api}/user/signup`;
