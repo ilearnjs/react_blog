@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 class Post extends Component {
 	onRemoveClicked() {
 		const { post: { _id }, removePost } = this.props;
-		
+
 		removePost(_id);
 	}
 
@@ -19,7 +19,7 @@ class Post extends Component {
 						</div>
 						<Link to={`/user/${post.user.name}`}>
 							<span className="name">
-								{`mr.${post.user.name}`}
+								{post.user.name}
 							</span>
 						</Link>
 						<span className="created">

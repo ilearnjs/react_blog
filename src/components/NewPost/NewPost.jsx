@@ -35,7 +35,7 @@ class NewPost extends Component {
 						</div>
 						<Link to={`/user/${userName}`}>
 							<span className="name">
-								{`mr.${userName}`}
+								{userName}
 							</span>
 						</Link>
 					</div>

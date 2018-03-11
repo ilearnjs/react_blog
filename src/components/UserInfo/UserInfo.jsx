@@ -7,7 +7,7 @@ const user = ({ userName }) => {
 				<div className={`avatar-big ${userName}`}>
 				</div>
 				<span className="name-big">
-					{`mr.${userName}`}
+					{userName}
 				</span>
 			</div>
 		</div>

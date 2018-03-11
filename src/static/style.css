@@ -80,33 +80,6 @@ body {
 	border-right: 1px solid #65768a;
 }
 
-.avatar.orange, .avatar-big.orange {
-	background: orange;
-}
-
-.avatar.white, .avatar-big.white {
-	background: white;
-}
-
-.avatar.brown {
-	background: brown;
-}
-
-.avatar-big.brown  {
-	background-image: url(http://2.media.dorkly.cvcdn.com/36/86/0a47d1ca0a9a9bc0652e76491b72fb1a-mr-brown.jpg);
-	background-size: cover;         
-    background-repeat: no-repeat;
-    background-position: center center;
-}
-
-.avatar.pink, .avatar-big.pink  {
-	background: pink;
-}
-
-.avatar.blue, .avatar-big.blue {
-	background: blue;
-}
-
 .name {
 	margin-right: 10px;
 }
