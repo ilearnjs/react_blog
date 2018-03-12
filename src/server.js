@@ -7,21 +7,27 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk'
 import { matchRoutes, renderRoutes } from 'react-router-config';
+import cookieParser from 'cookie-parser';
 
 import reducer from './reducers/index';
 import App from './App'
 import routes from './routes';
 import { ssr } from './reducers/main';
+import { setUser } from './reducers/sign';
 
 const app = new Express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use(cookieParser());
 app.use(Express.static('./dist', { index: false, }));
 
 app.get('*', (req, res) => {
 	const store = createStore(reducer, applyMiddleware(thunk));
 	const branch = matchRoutes(routes, req.url);
+	if (req.cookies['user.name']) {
+		store.dispatch(setUser(req.cookies['user.name']));
+	}
 	const promises = branch.map(({ route, match }) => {
 		let ssrAction = route.component.ssrAction;
 		return ssrAction instanceof Function ? ssrAction(store, match) : Promise.resolve();

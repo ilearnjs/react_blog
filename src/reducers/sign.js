@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-import { api_signin, api_signup } from '../apiConstants';
-import { removeToken, setToken } from '../services/tokenService';
+import { api_signin, api_signup, api_signout } from '../apiConstants';
+
+axios.defaults.withCredentials = true;
 
 const USER_SIGNED_IN = 'sign/user_signed_in';
 const USER_SIGNED_OUT = 'sign/user_signed_out';
@@ -50,12 +51,9 @@ export default function sign(state = initialState, action) {
 }
 
 export const signin = (userName, password) => (dispatch) => {
-	return axios.post(api_signin, {
-		userName,
-		password
-	})
+	return axios
+		.post(api_signin, { userName, password })
 		.then(response => {
-			setToken(response.data.token);
 			dispatch({
 				type: USER_SIGNED_IN,
 				user: response.data.user
@@ -75,7 +73,6 @@ export const signup = (userName, password) => (dispatch) => {
 		password
 	})
 		.then(response => {
-			setToken(response.data.token);
 			dispatch({
 				type: USER_SIGNED_IN,
 				user: response.data.user
@@ -90,14 +87,23 @@ export const signup = (userName, password) => (dispatch) => {
 }
 
 export const signout = () => (dispatch) => {
-	removeToken();
-	return dispatch({
-		type: USER_SIGNED_OUT
-	});
+	return axios.post(api_signout)
+		.then(response => {
+			return dispatch({
+				type: USER_SIGNED_OUT
+			});
+		});
 }
 
 export const stateReset = () => (dispatch) => {
 	return dispatch({
 		type: STATE_RESET
+	});
+}
+
+export const setUser = (userName) => (dispatch) => {
+	dispatch({
+		type: USER_SIGNED_IN,
+		user: { name: userName }
 	});
 }

@@ -40,7 +40,7 @@ class UserContainer extends Component {
 				<Posts
 					posts={this.props.posts}
 					currentUser={this.props.user}
-					remove={this.props.removePost}
+					removePost={this.props.removePost}
 				/>
 			</Aux>
 		);

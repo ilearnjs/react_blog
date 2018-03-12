@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 import { api_posts, api_posts_remove } from '../apiConstants';
-import { getToken } from '../services/tokenService';
+
+axios.defaults.withCredentials = true;
 
 const POSTS_LOADED = 'main/posts_loaded';
 const POST_ADDED = 'main/post_added';
@@ -74,7 +75,7 @@ export const addPost = (content) => (dispatch) => {
 	};
 
 	return axios
-		.post(api_posts, post, getAxiosConfig())
+		.post(api_posts, post)
 		.then(response => dispatch({
 			type: POST_ADDED,
 			post: response.data
@@ -82,7 +83,7 @@ export const addPost = (content) => (dispatch) => {
 }
 
 export const removePost = (postId) => (dispatch) => {
-	return axios.delete(api_posts_remove(postId), getAxiosConfig())
+	return axios.delete(api_posts_remove(postId))
 		.then(response => dispatch({
 			type: POST_REMOVED,
 			postId: postId
@@ -93,12 +94,4 @@ export const stateReset = () => (dispatch) => {
 	return dispatch({
 		type: STATE_RESET
 	});
-}
-
-function getAxiosConfig() {
-	return {
-		headers: {
-			'Authorization': getToken()
-		}
-	};
 }
