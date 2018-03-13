@@ -18,7 +18,6 @@ const initialState = {
 export default function main(state = initialState, action) {
 	switch (action.type) {
 		case STATE_RESET:
-			console.log('state reset');
 			return initialState;
 		case POSTS_LOADED:
 			return Object.assign(

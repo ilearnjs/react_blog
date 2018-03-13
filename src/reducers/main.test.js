@@ -13,6 +13,16 @@ beforeEach(() => {
 	};
 });
 
+test('toEqual for circular dependency works', () => {
+	const a = { field: 'text' };
+	a.a = a;
+
+	const b = { field: 'text' };
+	b.a = b;
+
+	expect(a).toEqual(b);
+});
+
 describe('main reducer', () => {
 	test('should return initial state', () => {
 		const result = reducer(undefined, {});
@@ -24,10 +34,8 @@ describe('main reducer', () => {
 			...initialState,
 			posts: [1, 2]
 		};
-		console.log(state);
 		const action = { type: STATE_RESET };
 
-		console.log(action);
 		const result = reducer(state, action);
 
 		expect(result).toEqual(initialState);
