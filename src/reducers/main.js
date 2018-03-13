@@ -4,10 +4,10 @@ import { api_posts, api_posts_remove } from '../apiConstants';
 
 axios.defaults.withCredentials = true;
 
-const POSTS_LOADED = 'main/posts_loaded';
-const POST_ADDED = 'main/post_added';
-const POST_REMOVED = 'main/post_removed';
-const STATE_RESET = 'main/reset';
+export const POSTS_LOADED = 'main/posts_loaded';
+export const POST_ADDED = 'main/post_added';
+export const POST_REMOVED = 'main/post_removed';
+export const STATE_RESET = 'main/reset';
 
 const initialState = {
 	isLoading: true,
@@ -18,6 +18,7 @@ const initialState = {
 export default function main(state = initialState, action) {
 	switch (action.type) {
 		case STATE_RESET:
+			console.log('state reset');
 			return initialState;
 		case POSTS_LOADED:
 			return Object.assign(
@@ -60,7 +61,7 @@ export default function main(state = initialState, action) {
 	}
 }
 
-export const getPosts = (ssr) => (dispatch) => {
+export const getPosts = (ssr = false) => (dispatch) => {
 	return axios.get(api_posts)
 		.then(response => dispatch({
 			type: POSTS_LOADED,
