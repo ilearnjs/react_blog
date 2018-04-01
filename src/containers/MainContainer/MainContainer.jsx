@@ -5,7 +5,12 @@ import { connect } from 'react-redux';
 import Aux from "../Auxiliary/Auxiliary";
 import Posts from '../../components/Posts/Posts';
 import NewPost from "../../components/NewPost/NewPost";
-import { getPosts, addPost, removePost, stateReset } from './../../reducers/main/actions';
+import {
+	getPosts,
+	addPost,
+	removePost,
+	stateReset
+} from './../../reducers/main/actions';
 
 class MainContainer extends Component {
 	static ssrAction(store) {
@@ -30,7 +35,7 @@ class MainContainer extends Component {
 		}
 
 		const currentUser = this.props.user;
-		
+
 		return (
 			<Aux>
 				{currentUser &&

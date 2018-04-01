@@ -24,13 +24,13 @@ beforeEach(() => {
 });
 
 describe('main reducer', () => {
-	test('should return initial state', () => {
+	test('initial state', () => {
 		const result = reducer(undefined, {});
 
 		expect(result).toEqual(initialState);
 	});
 
-	test('should return correct state after state reset', () => {
+	test('state after state reset', () => {
 		const state = {
 			...initialState,
 			posts: posts
@@ -42,8 +42,8 @@ describe('main reducer', () => {
 		expect(result).toEqual(initialState);
 	});
 
-	describe('should return correct state after posts loaded', () => {
-		test('on clent side', () => {
+	describe('state after posts loaded', () => {
+		test('client side', () => {
 			const action = { type: POSTS_LOADED, posts, ssr: false };
 
 			const result = reducer(initialState, action);
@@ -55,7 +55,7 @@ describe('main reducer', () => {
 			});
 		});
 
-		test('on server side', () => {
+		test('server side', () => {
 			const action = { type: POSTS_LOADED, posts, ssr: true };
 
 			const result = reducer(initialState, action);
@@ -68,7 +68,7 @@ describe('main reducer', () => {
 		});
 	});
 
-	test('should return correct state after post added', () => {
+	test('state after post added', () => {
 		const state = {
 			...initialState,
 			posts: posts
@@ -81,7 +81,7 @@ describe('main reducer', () => {
 		expect(result.posts).toEqual([newPost, ...posts]);
 	});
 
-	test('should return correct state after post removed', () => {
+	test('state after post removed', () => {
 		const state = {
 			...initialState,
 			posts: posts
