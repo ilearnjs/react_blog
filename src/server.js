@@ -12,7 +12,6 @@ import cookieParser from 'cookie-parser';
 import reducer from './reducers/index';
 import App from './App'
 import routes from './routes';
-import { ssr } from './reducers/main';
 import { setUser } from './reducers/sign';
 
 const app = new Express();
@@ -55,5 +54,9 @@ app.get('*', (req, res) => {
 		}
 	});
 });
+
+app.use((err, req, res, next) => {
+	console.error(err);
+})
 
 app.listen(8080);
