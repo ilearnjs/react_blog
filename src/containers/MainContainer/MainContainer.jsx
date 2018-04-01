@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Aux from "../Auxiliary/Auxiliary";
 import Posts from '../../components/Posts/Posts';
 import NewPost from "../../components/NewPost/NewPost";
-import { getPosts, addPost, removePost, stateReset } from './../../reducers/main';
+import { getPosts, addPost, removePost, stateReset } from './../../reducers/main/actions';
 
 class MainContainer extends Component {
 	static ssrAction(store) {
