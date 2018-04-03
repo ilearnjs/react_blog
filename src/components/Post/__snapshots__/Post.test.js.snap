@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="post"
+>
+  <div
+    className="post-content"
+  >
+    <div
+      className="header"
+    >
+      <div
+        className="avatar"
+        style={
+          Object {
+            "backgroundImage": "url(https://api.adorable.io/avatars/60/Jurgen)",
+          }
+        }
+      />
+      <a
+        href="/user/Jurgen"
+        onClick={[Function]}
+      >
+        <span
+          className="name"
+        >
+          Jurgen
+        </span>
+      </a>
+      <span
+        className="created"
+      >
+        1/1/2018
+      </span>
+    </div>
+    <div
+      className="text"
+    >
+      Azaza
+    </div>
+  </div>
+</div>
+`;

@@ -19,7 +19,7 @@ class Post extends Component {
 				<div className="post-content">
 					<div className="header">
 						<div
-							className={`avatar ${post.user.name}`}
+							className="avatar"
 							style={avatarStyle}
 						>
 						</div>
